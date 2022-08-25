@@ -3,7 +3,7 @@ module github.com/danpilch/awls
 go 1.17
 
 require (
-	github.com/alecthomas/kong v0.2.18
+	github.com/alecthomas/kong v0.6.1
 	github.com/aws/aws-sdk-go-v2 v1.16.7
 	github.com/aws/aws-sdk-go-v2/config v1.10.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.47.2
