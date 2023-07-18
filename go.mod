@@ -1,6 +1,6 @@
 module github.com/danpilch/awls
 
-go 1.19
+go 1.20
 
 require (
 	github.com/alecthomas/kong v0.6.1
@@ -22,5 +22,4 @@ require (
 	github.com/aws/smithy-go v1.12.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 )

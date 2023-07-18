@@ -58,23 +58,25 @@ func buildTableData(result *ec2.DescribeInstancesOutput) ([][]string, []string) 
 
 	for _, reservation := range result.Reservations {
 		for _, i := range reservation.Instances {
-			var nameTag string
-			for _, t := range i.Tags {
-				if *t.Key == "Name" {
-					nameTag = *t.Value
-					break
+			if string(i.State.Name) != "terminated" {
+				var nameTag string
+				for _, t := range i.Tags {
+					if *t.Key == "Name" {
+						nameTag = *t.Value
+						break
+					}
 				}
+	
+				tbl = append(tbl, []string{
+					nameTag,
+					*i.PrivateIpAddress,
+					string(i.State.Name),
+					*i.Placement.AvailabilityZone,
+					*i.InstanceId,
+					string(i.InstanceType),
+					string(i.LaunchTime.Format("2006-01-02 15:04:05")),
+				})
 			}
-
-			tbl = append(tbl, []string{
-				nameTag,
-				*i.PrivateIpAddress,
-				string(i.State.Name),
-				*i.Placement.AvailabilityZone,
-				*i.InstanceId,
-				string(i.InstanceType),
-				string(i.LaunchTime.Format("2006-01-02 15:04:05")),
-			})
 		}
 	}
 	return tbl, tblHeaders
