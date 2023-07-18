@@ -1,7 +1,7 @@
 # .goreleaser.yml
 brews:
   - name: awls
-    tap:
+    respository:
       owner: danpilch
       name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
