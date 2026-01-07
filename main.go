@@ -57,6 +57,14 @@ func buildPrivateIpData(result *ec2.DescribeInstancesOutput) []string {
 	return privateIps
 }
 
+func toAny(s []string) []any {
+	result := make([]any, len(s))
+	for i, v := range s {
+		result[i] = v
+	}
+	return result
+}
+
 func buildTableData(result *ec2.DescribeInstancesOutput) ([][]string, []string) {
 	var tbl = [][]string{}
 	var tblHeaders = []string{"Name", "PrivateIp", "State", "AZ", "InstanceId", "InstanceType", "LaunchTime"}
@@ -179,9 +187,8 @@ func main() {
 	} else {
 		tableData, tableHeaders := buildTableData(result)
 		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader(tableHeaders)
-		table.SetAutoFormatHeaders(true)
-		table.AppendBulk(tableData)
+		table.Header(toAny(tableHeaders)...)
+		table.Bulk(tableData)
 		table.Render()
 	}
 }
