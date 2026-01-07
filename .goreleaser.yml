@@ -1,10 +1,11 @@
 # .goreleaser.yml
+version: 2
 brews:
   - name: awls
-    respository:
+    repository:
       owner: danpilch
       name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
-    folder: Formula
+    directory: Formula
     description: "Lookup EC2 information in the terminal"
     license: "MIT"
